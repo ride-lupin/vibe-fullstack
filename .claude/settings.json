@@ -1,0 +1,66 @@
+{
+  "model": "claude-sonnet-4-6",
+  "env": {
+    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1"
+  },
+  "permissions": {
+    "allow": [
+      "Bash(pnpm:*)",
+      "Bash(npx:*)",
+      "Bash(node:*)",
+      "Bash(git:*)",
+      "Bash(docker:*)",
+      "Bash(docker compose:*)"
+    ]
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "INPUT=$(cat); CMD=$(echo \"$INPUT\" | jq -r '.tool_input.command // \"\"'); if echo \"$CMD\" | grep -q 'git commit'; then BLOCKED=0; ROOT=/Users/lupin/Documents/vibe-fullstack; (cd \"$ROOT\" && pnpm --filter api tsc --noEmit >&2); if [ $? -ne 0 ]; then echo '{\"continue\": false, \"stopReason\": \"❌ 백엔드 TypeScript 타입 에러. git commit 차단. pnpm --filter api tsc --noEmit 으로 확인하세요.\"}'; BLOCKED=1; fi; if [ \"$BLOCKED\" -eq 0 ]; then (cd \"$ROOT\" && pnpm --filter web tsc --noEmit >&2); if [ $? -ne 0 ]; then echo '{\"continue\": false, \"stopReason\": \"❌ 프런트엔드 TypeScript 타입 에러. git commit 차단. pnpm --filter web tsc --noEmit 으로 확인하세요.\"}'; BLOCKED=1; fi; fi; if [ \"$BLOCKED\" -eq 0 ]; then (cd \"$ROOT\" && pnpm --filter api test >&2); if [ $? -ne 0 ]; then echo '{\"continue\": false, \"stopReason\": \"❌ 백엔드 단위 테스트 실패. git commit 차단.\"}'; fi; fi; fi",
+            "timeout": 180,
+            "statusMessage": "타입 체크 및 테스트 실행 중..."
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "INPUT=$(cat); FILE=$(echo \"$INPUT\" | jq -r '.tool_input.file_path // \"\"'); if echo \"$FILE\" | grep -qE '/apps/web/doc/[^_/][^/]*\\.md$'; then FEATURE=$(basename \"$FILE\" .md); printf '{\"hookSpecificOutput\":{\"hookEventName\":\"PostToolUse\",\"additionalContext\":\"🔔 [PostToolUse] apps/web/doc/%s.md 수정 감지 — 즉시 실행하세요:\\n1) /sync-e2e --auto %s\\n2) /sync-impl --auto %s\"}}' \"$FEATURE\" \"$FEATURE\" \"$FEATURE\"; fi; if echo \"$FILE\" | grep -qE '/apps/api/doc/[^_/][^/]*\\.md$'; then FEATURE=$(basename \"$FILE\" .md); printf '{\"hookSpecificOutput\":{\"hookEventName\":\"PostToolUse\",\"additionalContext\":\"🔔 [PostToolUse] apps/api/doc/%s.md 수정 감지 — 즉시 실행하세요:\\n1) /sync-schema --auto %s\\n2) /sync-api --auto %s\"}}' \"$FEATURE\" \"$FEATURE\" \"$FEATURE\"; fi",
+            "timeout": 30,
+            "statusMessage": "doc/*.md 변경 감지 중..."
+          }
+        ]
+      },
+      {
+        "matcher": "Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "INPUT=$(cat); FILE=$(echo \"$INPUT\" | jq -r '.tool_input.file_path // \"\"'); if echo \"$FILE\" | grep -qE '/apps/web/doc/[^_/][^/]*\\.md$'; then FEATURE=$(basename \"$FILE\" .md); printf '{\"hookSpecificOutput\":{\"hookEventName\":\"PostToolUse\",\"additionalContext\":\"🔔 [PostToolUse] apps/web/doc/%s.md 수정 감지 — 즉시 실행하세요:\\n1) /sync-e2e --auto %s\\n2) /sync-impl --auto %s\"}}' \"$FEATURE\" \"$FEATURE\" \"$FEATURE\"; fi; if echo \"$FILE\" | grep -qE '/apps/api/doc/[^_/][^/]*\\.md$'; then FEATURE=$(basename \"$FILE\" .md); printf '{\"hookSpecificOutput\":{\"hookEventName\":\"PostToolUse\",\"additionalContext\":\"🔔 [PostToolUse] apps/api/doc/%s.md 수정 감지 — 즉시 실행하세요:\\n1) /sync-schema --auto %s\\n2) /sync-api --auto %s\"}}' \"$FEATURE\" \"$FEATURE\" \"$FEATURE\"; fi",
+            "timeout": 30,
+            "statusMessage": "doc/*.md 변경 감지 중..."
+          }
+        ]
+      },
+      {
+        "matcher": "Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "INPUT=$(cat); FILE=$(echo \"$INPUT\" | jq -r '.tool_input.file_path // \"\"'); if echo \"$FILE\" | grep -qE '/packages/shared/src/schemas/[^/]+\\.ts$'; then printf '{\"hookSpecificOutput\":{\"hookEventName\":\"PostToolUse\",\"additionalContext\":\"🔔 [PostToolUse] 공유 스키마 변경 감지 — 전체 타입 체크를 실행하세요: pnpm tsc --noEmit\"}}'; fi",
+            "timeout": 10,
+            "statusMessage": "스키마 변경 감지 중..."
+          }
+        ]
+      }
+    ]
+  }
+}

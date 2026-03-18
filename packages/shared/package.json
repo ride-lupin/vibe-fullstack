@@ -1,0 +1,22 @@
+{
+  "name": "@repo/shared",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./schemas/*": "./src/schemas/*.ts",
+    "./types/*": "./src/types/*.ts",
+    "./constants/*": "./src/constants/*.ts",
+    "./utils/*": "./src/utils/*.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "zod": "^3.24.1"
+  },
+  "devDependencies": {
+    "@repo/typescript-config": "workspace:*",
+    "typescript": "^5.7.3"
+  }
+}
