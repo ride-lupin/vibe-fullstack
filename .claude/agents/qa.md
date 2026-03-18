@@ -17,7 +17,7 @@ model: claude-sonnet-4-6
 
 ## 검사 순서
 
-1. `pnpm tsc --noEmit` — 전체 워크스페이스 타입 체크
+1. `pnpm --filter api typecheck && pnpm --filter web typecheck` — 타입 체크
 2. `pnpm lint` — 린트 검사 + 자동 수정
 3. TypeScript strict 준수 확인 (no `any`)
 4. 에러 핸들링 패턴 확인 (HTTPError catch → error.message → alert)

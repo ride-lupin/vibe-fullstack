@@ -72,7 +72,7 @@ after architect finishes. Each teammate owns separate files — no overlapping e
 
 - `pnpm --filter api test` 통과
 - `pnpm --filter web test:bot {feature}` 통과
-- `pnpm tsc --noEmit` 통과
+- `pnpm --filter api typecheck && pnpm --filter web typecheck` 통과
 - `/qa-review backend` + `/qa-review frontend` 완료
 - `/perf-review` 완료
 

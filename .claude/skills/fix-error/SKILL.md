@@ -38,7 +38,7 @@ Error Handler 에이전트가:
 ```bash
 pnpm tsc --noEmit          # 타입 에러
 pnpm --filter api test     # 백엔드 테스트
-pnpm test:bot {feature}    # E2E 테스트 (해당 시)
+pnpm --filter web test:bot {feature}    # E2E 테스트 (해당 시)
 ```
 
 ### 4. 지식베이스 기록

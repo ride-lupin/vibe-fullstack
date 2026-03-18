@@ -49,7 +49,7 @@ PRD + E2E 기반으로 6계층 프런트엔드 코드를 구현한다.
 ### 5. 타입 체크
 
 ```bash
-pnpm --filter web tsc --noEmit
+pnpm --filter web typecheck
 ```
 
 에러 시 즉시 수정 (최대 2회).
