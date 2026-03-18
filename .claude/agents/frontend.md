@@ -48,8 +48,12 @@ model: claude-sonnet-4-6
 
 ## 사용 가능한 스킬
 
-| 스킬 | 경로 | 용도 |
-|------|------|------|
-| `/sync-e2e {feature}` | `.claude/skills/frontend/sync-e2e/SKILL.md` | PRD → Playwright E2E 테스트 생성 |
-| `/sync-impl {feature}` | `.claude/skills/frontend/sync-impl/SKILL.md` | E2E 기반 6계층 프런트엔드 구현 |
-| `/qa-review frontend` | `.claude/skills/qa-review/SKILL.md` | 프런트엔드 코드 품질 리뷰 |
+| 스킬 | 용도 |
+|------|------|
+| `/sync-e2e {feature}` | PRD → Playwright E2E 테스트 생성 |
+| `/sync-impl {feature}` | E2E 기반 6계층 프런트엔드 구현 |
+| `/qa-review frontend` | 프런트엔드 코드 품질 리뷰 |
+
+@.claude/skills/frontend/sync-e2e/SKILL.md
+@.claude/skills/frontend/sync-impl/SKILL.md
+@.claude/skills/qa-review/SKILL.md

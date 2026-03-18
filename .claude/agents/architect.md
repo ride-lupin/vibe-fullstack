@@ -60,6 +60,8 @@ export type NewItem = typeof items.$inferInsert
 
 ## 사용 가능한 스킬
 
-| 스킬 | 경로 | 용도 |
-|------|------|------|
-| `/sync-schema {feature}` | `.claude/skills/architect/sync-schema/SKILL.md` | PRD → 공유 Zod 스키마 + DB 스키마 생성 |
+| 스킬 | 용도 |
+|------|------|
+| `/sync-schema {feature}` | PRD → 공유 Zod 스키마 + DB 스키마 생성 |
+
+@.claude/skills/architect/sync-schema/SKILL.md

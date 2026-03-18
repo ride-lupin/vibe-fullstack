@@ -41,7 +41,10 @@ model: claude-sonnet-4-6
 
 ## 사용 가능한 스킬
 
-| 스킬 | 경로 | 용도 |
-|------|------|------|
-| `/sync-api {feature}` | `.claude/skills/backend/sync-api/SKILL.md` | Hono API + Vitest 테스트 구현 |
-| `/qa-review backend` | `.claude/skills/qa-review/SKILL.md` | 백엔드 코드 품질 리뷰 |
+| 스킬 | 용도 |
+|------|------|
+| `/sync-api {feature}` | Hono API + Vitest 테스트 구현 |
+| `/qa-review backend` | 백엔드 코드 품질 리뷰 |
+
+@.claude/skills/backend/sync-api/SKILL.md
+@.claude/skills/qa-review/SKILL.md

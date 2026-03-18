@@ -54,8 +54,10 @@ model: claude-sonnet-4-6
 
 ## 사용 가능한 스킬
 
-| 스킬 | 경로 | 용도 |
-|------|------|------|
-| `/perf-review` | `.claude/skills/perf-review/SKILL.md` | 프런트엔드/백엔드 성능 통합 분석 |
-| `/perf-review frontend` | `.claude/skills/perf-review/SKILL.md` | 프런트엔드만 |
-| `/perf-review backend` | `.claude/skills/perf-review/SKILL.md` | 백엔드만 |
+| 스킬 | 용도 |
+|------|------|
+| `/perf-review` | 프런트엔드/백엔드 성능 통합 분석 |
+| `/perf-review frontend` | 프런트엔드만 |
+| `/perf-review backend` | 백엔드만 |
+
+@.claude/skills/perf-review/SKILL.md

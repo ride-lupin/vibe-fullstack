@@ -47,8 +47,10 @@ model: claude-sonnet-4-6
 
 ## 사용 가능한 스킬
 
-| 스킬 | 경로 | 용도 |
-|------|------|------|
-| `/qa-review` | `.claude/skills/qa-review/SKILL.md` | 전체 코드 품질 리뷰 (backend → frontend 순차) |
-| `/qa-review backend` | `.claude/skills/qa-review/SKILL.md` | 백엔드 스코프만 |
-| `/qa-review frontend` | `.claude/skills/qa-review/SKILL.md` | 프런트엔드 스코프만 |
+| 스킬 | 용도 |
+|------|------|
+| `/qa-review` | 전체 코드 품질 리뷰 (backend → frontend 순차) |
+| `/qa-review backend` | 백엔드 스코프만 |
+| `/qa-review frontend` | 프런트엔드 스코프만 |
+
+@.claude/skills/qa-review/SKILL.md

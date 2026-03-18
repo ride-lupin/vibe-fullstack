@@ -104,16 +104,19 @@ pnpm --filter api db:push    # 스키마 푸시 (개발)
 pnpm --filter api db:migrate # 마이그레이션 실행
 pnpm --filter api db:studio  # Drizzle Studio
 
+# 린트
+pnpm --filter api lint       # 백엔드 린트
+pnpm --filter web lint       # 프런트 린트
+
+# 타입 체크
+pnpm --filter api typecheck  # 백엔드 타입 체크
+pnpm --filter web typecheck  # 프런트 타입 체크
+
 # 테스트
 pnpm --filter api test                    # 백엔드 단위 테스트
 pnpm --filter web test:bot {feature}      # E2E 테스트 (특정 기능)
 pnpm --filter web test:bot                # E2E 전체
-pnpm --filter web test:bot --changed      # 변경분만
-
-# 타입 체크
-pnpm tsc --noEmit            # 전체 워크스페이스
-pnpm --filter api tsc --noEmit
-pnpm --filter web tsc --noEmit
+pnpm --filter web test:bot:changed        # 변경분만
 
 # 빌드
 pnpm build                   # 전체 빌드
@@ -171,7 +174,7 @@ apps/web/src/app/{domain}/hooks/use-{feature}.ts  (zodResolver)
 |--------|------|
 | `git commit` | 백엔드 tsc + 프런트 tsc + 백엔드 테스트 통과 시에만 허용 |
 | `docs/features/*.md` 수정 | `/sync-schema --auto` → `/sync-api --auto` → `/sync-e2e --auto` → `/sync-impl --auto` 자동 실행 |
-| `packages/shared/src/schemas/*.ts` 수정 | `pnpm tsc --noEmit` 실행 알림 |
+| `packages/shared/src/schemas/*.ts` 수정 | `pnpm --filter api typecheck && pnpm --filter web typecheck` 실행 알림 |
 
 ---
 
@@ -200,13 +203,3 @@ cp .env.example .env
 | `JWT_SECRET` | JWT 서명 키 (32자 이상) |
 | `VITE_API_BASE_URL` | 프런트에서 API 서버 주소 |
 
----
-
-## 커밋 형식
-
-```
-feat: 기능 추가
-fix: 버그 수정
-refactor: 리팩토링
-chore: 기타 작업
-```

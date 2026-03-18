@@ -69,7 +69,10 @@ auto_fixable: {true|false}
 
 ## 사용 가능한 스킬
 
-| 스킬 | 경로 | 용도 |
-|------|------|------|
-| `/fix-error {description}` | `.claude/skills/fix-error/SKILL.md` | 에러 진단/수정 + 지식베이스 기록 |
-| `/error-report` | `.claude/skills/error-report/SKILL.md` | 에러 현황 카테고리별 통계 리포트 |
+| 스킬 | 용도 |
+|------|------|
+| `/fix-error {description}` | 에러 진단/수정 + 지식베이스 기록 |
+| `/error-report` | 에러 현황 카테고리별 통계 리포트 |
+
+@.claude/skills/fix-error/SKILL.md
+@.claude/skills/error-report/SKILL.md
