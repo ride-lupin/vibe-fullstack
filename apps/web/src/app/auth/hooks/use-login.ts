@@ -14,11 +14,11 @@ export const useLogin = () => {
     try {
       const result = await mutateAsync(data)
       setToken(result.data.accessToken)
-      navigate(ROUTES.DASHBOARD)
+      void navigate(ROUTES.DASHBOARD)
     } catch (e) {
       if (e instanceof HTTPError) {
-        const body = await e.response.json().catch(() => ({}))
-        alert((body as { error?: { message?: string } }).error?.message ?? '로그인에 실패했습니다.')
+        const body = (await e.response.json().catch(() => ({}))) as { error?: { message?: string } }
+        alert(body.error?.message ?? '로그인에 실패했습니다.')
       }
     }
   }

@@ -28,6 +28,7 @@ app.route('/v1/auth', authRouter)
 app.onError(errorHandler)
 
 serve({ fetch: app.fetch, port: env.PORT }, () => {
+  // eslint-disable-next-line no-console
   console.log(`🚀 API 서버 실행 중: http://localhost:${env.PORT}`)
 })
 

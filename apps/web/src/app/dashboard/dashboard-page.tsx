@@ -8,7 +8,7 @@ export const DashboardPage = () => {
 
   const handleLogout = () => {
     clearToken()
-    navigate(ROUTES.LOGIN)
+    void navigate(ROUTES.LOGIN)
   }
 
   return (
