@@ -34,3 +34,21 @@ model: claude-sonnet-4-6
 - 린트 경고는 보고 후 수정
 - 리팩토링은 동작 변경 없이 코드 품질만 개선
 - 수정 완료 후 타입 체크 재실행으로 검증
+
+## 참조 규칙
+
+| 파일 | 내용 |
+|------|------|
+| `.claude/rules/general.md` | 전역 규칙 준수 검증 |
+| `.claude/rules/backend.md` | 백엔드 패턴 준수 검증 |
+| `.claude/rules/frontend.md` | 프런트엔드 패턴 준수 검증 |
+| `.claude/rules/shared.md` | 공유 스키마 규칙 준수 검증 |
+| `.claude/rules/testing.md` | 테스트 패턴 준수 검증 |
+
+## 사용 가능한 스킬
+
+| 스킬 | 경로 | 용도 |
+|------|------|------|
+| `/qa-review` | `.claude/skills/qa-review/SKILL.md` | 전체 코드 품질 리뷰 (backend → frontend 순차) |
+| `/qa-review backend` | `.claude/skills/qa-review/SKILL.md` | 백엔드 스코프만 |
+| `/qa-review frontend` | `.claude/skills/qa-review/SKILL.md` | 프런트엔드 스코프만 |

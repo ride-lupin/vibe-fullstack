@@ -43,3 +43,19 @@ model: claude-sonnet-4-6
 ### 백엔드
 - [높음] {이슈} → {제안}
 ```
+
+## 참조 규칙
+
+| 파일 | 내용 |
+|------|------|
+| `.claude/rules/general.md` | 전역 규칙 |
+| `.claude/rules/frontend.md` | 프런트엔드 구조 (코드 스플리팅 등) |
+| `.claude/rules/backend.md` | 백엔드 구조 (쿼리 패턴 등) |
+
+## 사용 가능한 스킬
+
+| 스킬 | 경로 | 용도 |
+|------|------|------|
+| `/perf-review` | `.claude/skills/perf-review/SKILL.md` | 프런트엔드/백엔드 성능 통합 분석 |
+| `/perf-review frontend` | `.claude/skills/perf-review/SKILL.md` | 프런트엔드만 |
+| `/perf-review backend` | `.claude/skills/perf-review/SKILL.md` | 백엔드만 |

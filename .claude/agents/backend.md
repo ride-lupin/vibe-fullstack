@@ -31,48 +31,17 @@ model: claude-sonnet-4-6
 4. `apps/api/tests/{domain}/{feature}.test.ts` — Vitest 단위 테스트
 5. `pnpm --filter api test` 실행 + 실패 시 수정 (최대 2회)
 
-## 라우트 패턴
+## 참조 규칙
 
-```ts
-// apps/api/src/routes/{domain}/index.ts
-import { Hono } from 'hono'
-import { zValidator } from '@hono/zod-validator'
-import { SomeRequestSchema } from '@repo/shared/schemas/{domain}'
-import { someHandler } from './handlers.js'
+| 파일 | 내용 |
+|------|------|
+| `.claude/rules/general.md` | 전역 — 네이밍, 패키지 매니저 |
+| `.claude/rules/backend.md` | Hono 라우트, 응답 포맷, Drizzle 쿼리 |
+| `.claude/rules/testing.md` | Vitest 테스트 패턴 |
 
-export const domainRouter = new Hono()
-domainRouter.post('/', zValidator('json', SomeRequestSchema), someHandler)
-domainRouter.get('/:id', someGetHandler)
-```
+## 사용 가능한 스킬
 
-## 응답 포맷 (필수)
-
-항상 아래 포맷 사용:
-
-```ts
-// 성공
-c.json({ success: true, data: result })
-
-// 실패 (에러 핸들러가 처리)
-throw Errors.NOT_FOUND('item')
-```
-
-## Drizzle 쿼리 패턴
-
-```ts
-// 목록 조회
-const items = await db.select().from(table).orderBy(desc(table.createdAt))
-
-// 단건 조회 + 404 처리
-const [item] = await db.select().from(table).where(eq(table.id, id)).limit(1)
-if (!item) throw Errors.NOT_FOUND('item')
-
-// 생성
-const [created] = await db.insert(table).values(data).returning()
-
-// 수정
-const [updated] = await db.update(table).set(data).where(eq(table.id, id)).returning()
-
-// 삭제
-await db.delete(table).where(eq(table.id, id))
-```
+| 스킬 | 경로 | 용도 |
+|------|------|------|
+| `/sync-api {feature}` | `.claude/skills/backend/sync-api/SKILL.md` | Hono API + Vitest 테스트 구현 |
+| `/qa-review backend` | `.claude/skills/qa-review/SKILL.md` | 백엔드 코드 품질 리뷰 |

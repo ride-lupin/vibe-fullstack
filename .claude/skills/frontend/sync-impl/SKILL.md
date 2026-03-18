@@ -2,6 +2,7 @@
 name: sync-impl
 description: >
   PRD + E2E 테스트를 읽고 6계층 프런트엔드 코드를 자동 생성 또는 업데이트한다.
+  Frontend 에이전트가 실행한다.
   "/sync-impl {feature}", "구현해줘", "코드 생성" 요청 시 사용한다.
 ---
 
@@ -16,11 +17,11 @@ PRD + E2E 기반으로 6계층 프런트엔드 코드를 구현한다.
 /sync-impl --auto {feature}   훅에 의한 자동 호출
 ```
 
-## 실행 흐름 (8단계)
+## 실행 흐름 (6단계)
 
 ### 1. 입력 검증
 
-- `apps/web/doc/{feature}.md` 존재 확인
+- `docs/features/{feature}.md` 존재 확인
 - `apps/web/tests/e2e/{feature}.spec.ts` 존재 확인 (없으면 경고)
 - `packages/shared/src/schemas/{domain}.ts` 존재 확인
 
@@ -61,15 +62,6 @@ pnpm --filter web test:bot {feature}
 
 실패 시 수정 + 재실행 (최대 2회).
 
-### 7. 자동 커밋
-
-테스트 통과 시:
-```bash
-git commit -m "feat: {feature} 구현
-
-Co-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>"
-```
-
 ## E2E 셀렉터 정합성 규칙 (핵심)
 
 | E2E 셀렉터 | 구현 |
@@ -89,5 +81,4 @@ Co-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>"
 
 타입 체크: 통과
 테스트: pnpm test:bot {feature} — N개 통과
-커밋: feat: {feature} 구현 (abc1234)
 ```

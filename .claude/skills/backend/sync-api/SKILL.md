@@ -22,7 +22,7 @@ PRD + 공유 스키마 기반으로 Hono API를 구현한다.
 ### 1. 입력 파싱
 
 읽어야 할 파일:
-- `apps/api/doc/{feature}.md` — API PRD
+- `docs/features/{feature}.md` — 풀스택 PRD
 - `packages/shared/src/schemas/{domain}.ts` — 공유 스키마
 - `apps/api/src/db/schema/{domain}.ts` — DB 스키마
 - `packages/shared/src/constants/api-routes.ts` — API 경로

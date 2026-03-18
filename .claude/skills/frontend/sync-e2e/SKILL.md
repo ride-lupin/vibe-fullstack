@@ -1,8 +1,8 @@
 ---
 name: sync-e2e
 description: >
-  `apps/web/doc/{feature}.md` PRD를 읽고 `apps/web/tests/e2e/{feature}.spec.ts`
-  Playwright E2E 테스트를 자동 생성 또는 업데이트한다.
+  `docs/features/{feature}.md` PRD를 읽고 `apps/web/tests/e2e/{feature}.spec.ts`
+  Playwright E2E 테스트를 자동 생성 또는 업데이트한다. Frontend 에이전트가 실행한다.
   "/sync-e2e {feature}", "E2E 테스트 만들어줘", "spec 동기화" 요청 시 사용한다.
 ---
 

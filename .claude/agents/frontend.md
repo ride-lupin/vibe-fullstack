@@ -21,25 +21,13 @@ model: claude-sonnet-4-6
 - `apps/web/src/**`
 - `apps/web/tests/**`
 
-## 6계층 구현 순서
+## 참조 규칙
 
-1. `src/services/{domain}/constants.ts` — `@repo/shared/constants/api-routes`에서 import
-2. `src/services/{domain}/schema.ts` — `@repo/shared/schemas/{domain}`에서 re-export
-3. `src/services/{domain}/queries.ts` — React Query mutation/query
-4. `src/app/{domain}/hooks/use-{feature}.ts` — react-hook-form + useForm + zodResolver
-5. `src/app/{domain}/{feature}-page.tsx` — 페이지 컴포넌트 (렌더링만, 비즈니스 로직 금지)
-6. `src/constants/routes.ts` + `router.ts` — 라우트 등록
-
-## react-hook-form 패턴
-
-```tsx
-const { register, handleSubmit, formState: { errors } } = useForm<FormType>({
-  resolver: zodResolver(FormSchema),
-})
-
-// 에러 표시
-{errors.field && <p className="text-xs text-red-500">{errors.field.message}</p>}
-```
+| 파일 | 내용 |
+|------|------|
+| `.claude/rules/general.md` | 전역 — 네이밍, 패키지 매니저 |
+| `.claude/rules/frontend.md` | 6계층 구조, react-hook-form, 스타일링, import 경계 |
+| `.claude/rules/testing.md` | Playwright E2E 패턴 |
 
 ## E2E 셀렉터 정합성 (핵심)
 
@@ -57,3 +45,11 @@ const { register, handleSubmit, formState: { errors } } = useForm<FormType>({
   }
 }
 ```
+
+## 사용 가능한 스킬
+
+| 스킬 | 경로 | 용도 |
+|------|------|------|
+| `/sync-e2e {feature}` | `.claude/skills/frontend/sync-e2e/SKILL.md` | PRD → Playwright E2E 테스트 생성 |
+| `/sync-impl {feature}` | `.claude/skills/frontend/sync-impl/SKILL.md` | E2E 기반 6계층 프런트엔드 구현 |
+| `/qa-review frontend` | `.claude/skills/qa-review/SKILL.md` | 프런트엔드 코드 품질 리뷰 |

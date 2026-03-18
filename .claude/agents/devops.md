@@ -42,3 +42,13 @@ model: claude-sonnet-4-6
     path: ~/.pnpm-store
     key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
 ```
+
+## 참조 규칙
+
+| 파일 | 내용 |
+|------|------|
+| `.claude/rules/general.md` | 전역 규칙 — 패키지 매니저(pnpm), 커밋 형식 |
+
+## 사용 가능한 스킬
+
+현재 전용 스킬 없음. Docker/CI 작업은 에이전트 본문 지시를 직접 따른다.

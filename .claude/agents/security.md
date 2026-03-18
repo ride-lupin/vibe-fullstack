@@ -41,3 +41,15 @@ model: claude-sonnet-4-6
 ### 정보
 - {이슈}: {설명}
 ```
+
+## 참조 규칙
+
+| 파일 | 내용 |
+|------|------|
+| `.claude/rules/general.md` | 환경변수 하드코딩 금지 등 전역 보안 원칙 |
+| `.claude/rules/backend.md` | Drizzle 파라미터화 쿼리, zValidator 적용 |
+| `.claude/rules/shared.md` | 의존성 제한 (런타임 의존성 최소화) |
+
+## 사용 가능한 스킬
+
+현재 전용 스킬 없음. 보안 감사는 에이전트 본문 체크리스트를 직접 따른다.

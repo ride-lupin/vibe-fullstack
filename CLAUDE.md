@@ -42,6 +42,8 @@ vibe-fullstack/
 │   │   └── frontend/       # sync-e2e, sync-impl, qa-review
 │   ├── knowledge/errors/   # 에러 패턴 지식베이스
 │   └── settings.json
+├── docs/
+│   └── features/       # FE/BE 공유 풀스택 PRD 문서
 ├── apps/
 │   ├── web/            # React 19 + Vite
 │   └── api/            # Hono.js + Drizzle
@@ -58,7 +60,7 @@ vibe-fullstack/
 ### 풀스택 PRD 기반 TDD 플로우
 
 ```
-① PRD 작성           apps/web/doc/{feature}.md
+① PRD 작성           docs/features/{feature}.md
        ↓
 ② 스키마 설계         /sync-schema {feature}   ← Architect 에이전트
        ↓
@@ -168,15 +170,14 @@ apps/web/src/app/{domain}/hooks/use-{feature}.ts  (zodResolver)
 | 트리거 | 동작 |
 |--------|------|
 | `git commit` | 백엔드 tsc + 프런트 tsc + 백엔드 테스트 통과 시에만 허용 |
-| `apps/web/doc/*.md` 수정 | `/sync-e2e --auto` → `/sync-impl --auto` 자동 실행 |
-| `apps/api/doc/*.md` 수정 | `/sync-schema --auto` → `/sync-api --auto` 자동 실행 |
+| `docs/features/*.md` 수정 | `/sync-schema --auto` → `/sync-api --auto` → `/sync-e2e --auto` → `/sync-impl --auto` 자동 실행 |
 | `packages/shared/src/schemas/*.ts` 수정 | `pnpm tsc --noEmit` 실행 알림 |
 
 ---
 
 ## 레퍼런스 구현 — 인증 (로그인)
 
-- **PRD**: `apps/web/doc/login.md`
+- **PRD**: `docs/features/login.md`
 - **공유 스키마**: `packages/shared/src/schemas/auth.ts`
 - **DB 스키마**: `apps/api/src/db/schema/users.ts`
 - **API**: `apps/api/src/routes/auth/`

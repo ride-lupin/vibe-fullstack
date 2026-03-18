@@ -15,7 +15,7 @@ PRD를 기반으로 풀스택 피처 전체를 자동 구현한다.
 /new-feature {feature}    예: /new-feature user-management
 ```
 
-`{feature}`는 `doc/{feature}.md` PRD 파일명(확장자 제외)이다.
+`{feature}`는 `docs/features/{feature}.md` PRD 파일명(확장자 제외)이다.
 
 ---
 
@@ -23,7 +23,7 @@ PRD를 기반으로 풀스택 피처 전체를 자동 구현한다.
 
 ### 1. 사전 검증
 
-- `apps/web/doc/{feature}.md` 또는 `apps/api/doc/{feature}.md` 존재 확인
+- `docs/features/{feature}.md` 존재 확인
 - 없으면 중단 후 PRD 작성 요청
 
 ### 2. Agent Teams 또는 Subagent 모드 결정
@@ -34,7 +34,7 @@ Architect teammate → 스키마 설계 완료 대기
   ↓ 완료 시
 Backend teammate (병렬) + Frontend teammate (병렬)
   ↓ 둘 다 완료 시
-QA subagent → Perf subagent
+QA subagent → Perf subagent → git commit
 ```
 
 **Subagent 순차 모드** (간단한 피처 또는 Teams 비활성 시):
@@ -42,8 +42,9 @@ QA subagent → Perf subagent
 @architect → /sync-schema {feature}
 @backend   → /sync-api {feature}
 @frontend  → /sync-e2e {feature} → /sync-impl {feature}
-@qa        → /qa-review
+@qa        → /qa-review backend → /qa-review frontend
 @perf      → /perf-review
+→ git commit -m "feat: {feature} 구현"
 ```
 
 ### 3. Agent Teams 프롬프트 (참고용)
@@ -52,19 +53,16 @@ QA subagent → Perf subagent
 Create an agent team for implementing the {feature} feature.
 
 Spawn three teammates:
-1. architect: Read apps/web/doc/{feature}.md, design shared Zod schemas
-   in packages/shared/src/schemas/{domain}.ts, DB schema in
-   apps/api/src/db/schema/{domain}.ts, and update API route constants.
+1. architect: Run /sync-schema {feature}
+   — reads docs/features/{feature}.md, generates shared Zod schema,
+     DB schema, and API route constants.
 
-2. backend: After architect completes, implement Hono routes in
-   apps/api/src/routes/{domain}/, business logic in
-   apps/api/src/services/{domain}.ts, and Vitest tests in apps/api/tests/{domain}/.
-   Run pnpm --filter api test and fix failures (max 2 attempts).
+2. backend: After architect completes, run /sync-api {feature}
+   — implements Hono routes, service layer, and Vitest tests.
 
-3. frontend: After architect completes, write E2E tests in
-   apps/web/tests/e2e/{feature}.spec.ts following sync-e2e patterns,
-   then implement the 6-layer frontend code following sync-impl patterns.
-   Run pnpm --filter web test:bot {feature} and fix failures (max 2 attempts).
+3. frontend: After architect completes, run /sync-e2e {feature},
+   then run /sync-impl {feature}
+   — generates E2E tests then implements 6-layer frontend code.
 
 Coordinate through the task list. Backend and frontend work in parallel
 after architect finishes. Each teammate owns separate files — no overlapping edits.
@@ -75,9 +73,10 @@ after architect finishes. Each teammate owns separate files — no overlapping e
 - `pnpm --filter api test` 통과
 - `pnpm --filter web test:bot {feature}` 통과
 - `pnpm tsc --noEmit` 통과
-- QA 리뷰 완료
+- `/qa-review backend` + `/qa-review frontend` 완료
+- `/perf-review` 완료
 
-### 5. 자동 커밋
+### 5. 커밋
 
 모든 검증 통과 후:
 ```bash

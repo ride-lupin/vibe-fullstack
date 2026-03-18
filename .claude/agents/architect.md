@@ -27,8 +27,6 @@ PRD를 읽고 아래 산출물을 생성한다:
 - Zod 스키마가 FE/BE 타입의 single source of truth
 - DB 스키마 필드는 공유 Zod 스키마와 일치
 - 응답 타입에서 optional 필드 명시적 처리 (`.optional()` 또는 `.nullable()`)
-- 스키마 네이밍: `{Domain}{Entity}Schema` (예: `UserCreateRequestSchema`)
-- 타입 export: `export type Foo = z.infer<typeof FooSchema>`
 - 완료 후 Backend/Frontend가 읽어야 할 파일 목록을 명확히 출력
 
 ## 파일 소유권
@@ -52,3 +50,16 @@ export const items = pgTable('items', {
 export type Item = typeof items.$inferSelect
 export type NewItem = typeof items.$inferInsert
 ```
+
+## 참조 규칙
+
+| 파일 | 내용 |
+|------|------|
+| `.claude/rules/general.md` | 전역 — 네이밍, 패키지 매니저 |
+| `.claude/rules/shared.md` | Zod 스키마 네이밍, 타입 export |
+
+## 사용 가능한 스킬
+
+| 스킬 | 경로 | 용도 |
+|------|------|------|
+| `/sync-schema {feature}` | `.claude/skills/architect/sync-schema/SKILL.md` | PRD → 공유 Zod 스키마 + DB 스키마 생성 |

@@ -19,7 +19,7 @@ PRD를 분석하여 공유 스키마와 DB 스키마를 생성한다.
 
 ### 1. PRD 파싱
 
-`apps/web/doc/{feature}.md` 또는 `apps/api/doc/{feature}.md` 읽기:
+`docs/features/{feature}.md` 읽기:
 - API 연동 섹션 → 요청/응답 타입 추출
 - 폼 필드 → 유효성 검사 규칙 추출
 - 데이터 엔티티 → DB 스키마 설계

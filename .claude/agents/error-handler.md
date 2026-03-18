@@ -60,3 +60,16 @@ auto_fixable: {true|false}
 - `hono/` — 미들웨어 순서, CORS, 검증 에러
 - `drizzle/` — 마이그레이션 충돌, 쿼리 타입 에러
 - `build/` — Vite 번들 에러, Turborepo 캐시 에러
+
+## 참조 규칙
+
+| 파일 | 내용 |
+|------|------|
+| `.claude/rules/general.md` | 전역 규칙 |
+
+## 사용 가능한 스킬
+
+| 스킬 | 경로 | 용도 |
+|------|------|------|
+| `/fix-error {description}` | `.claude/skills/fix-error/SKILL.md` | 에러 진단/수정 + 지식베이스 기록 |
+| `/error-report` | `.claude/skills/error-report/SKILL.md` | 에러 현황 카테고리별 통계 리포트 |

@@ -33,9 +33,9 @@
         "hooks": [
           {
             "type": "command",
-            "command": "INPUT=$(cat); FILE=$(echo \"$INPUT\" | jq -r '.tool_input.file_path // \"\"'); if echo \"$FILE\" | grep -qE '/apps/web/doc/[^_/][^/]*\\.md$'; then FEATURE=$(basename \"$FILE\" .md); printf '{\"hookSpecificOutput\":{\"hookEventName\":\"PostToolUse\",\"additionalContext\":\"🔔 [PostToolUse] apps/web/doc/%s.md 수정 감지 — 즉시 실행하세요:\\n1) /sync-e2e --auto %s\\n2) /sync-impl --auto %s\"}}' \"$FEATURE\" \"$FEATURE\" \"$FEATURE\"; fi; if echo \"$FILE\" | grep -qE '/apps/api/doc/[^_/][^/]*\\.md$'; then FEATURE=$(basename \"$FILE\" .md); printf '{\"hookSpecificOutput\":{\"hookEventName\":\"PostToolUse\",\"additionalContext\":\"🔔 [PostToolUse] apps/api/doc/%s.md 수정 감지 — 즉시 실행하세요:\\n1) /sync-schema --auto %s\\n2) /sync-api --auto %s\"}}' \"$FEATURE\" \"$FEATURE\" \"$FEATURE\"; fi",
+            "command": "INPUT=$(cat); FILE=$(echo \"$INPUT\" | jq -r '.tool_input.file_path // \"\"'); if echo \"$FILE\" | grep -qE '/docs/features/[^_/][^/]*\\.md$'; then FEATURE=$(basename \"$FILE\" .md); printf '{\"hookSpecificOutput\":{\"hookEventName\":\"PostToolUse\",\"additionalContext\":\"🔔 [PostToolUse] docs/features/%s.md 수정 감지 — 즉시 실행하세요:\\n1) /sync-schema --auto %s\\n2) /sync-api --auto %s\\n3) /sync-e2e --auto %s\\n4) /sync-impl --auto %s\"}}' \"$FEATURE\" \"$FEATURE\" \"$FEATURE\" \"$FEATURE\" \"$FEATURE\"; fi",
             "timeout": 30,
-            "statusMessage": "doc/*.md 변경 감지 중..."
+            "statusMessage": "docs/features/*.md 변경 감지 중..."
           }
         ]
       },
@@ -44,9 +44,9 @@
         "hooks": [
           {
             "type": "command",
-            "command": "INPUT=$(cat); FILE=$(echo \"$INPUT\" | jq -r '.tool_input.file_path // \"\"'); if echo \"$FILE\" | grep -qE '/apps/web/doc/[^_/][^/]*\\.md$'; then FEATURE=$(basename \"$FILE\" .md); printf '{\"hookSpecificOutput\":{\"hookEventName\":\"PostToolUse\",\"additionalContext\":\"🔔 [PostToolUse] apps/web/doc/%s.md 수정 감지 — 즉시 실행하세요:\\n1) /sync-e2e --auto %s\\n2) /sync-impl --auto %s\"}}' \"$FEATURE\" \"$FEATURE\" \"$FEATURE\"; fi; if echo \"$FILE\" | grep -qE '/apps/api/doc/[^_/][^/]*\\.md$'; then FEATURE=$(basename \"$FILE\" .md); printf '{\"hookSpecificOutput\":{\"hookEventName\":\"PostToolUse\",\"additionalContext\":\"🔔 [PostToolUse] apps/api/doc/%s.md 수정 감지 — 즉시 실행하세요:\\n1) /sync-schema --auto %s\\n2) /sync-api --auto %s\"}}' \"$FEATURE\" \"$FEATURE\" \"$FEATURE\"; fi",
+            "command": "INPUT=$(cat); FILE=$(echo \"$INPUT\" | jq -r '.tool_input.file_path // \"\"'); if echo \"$FILE\" | grep -qE '/docs/features/[^_/][^/]*\\.md$'; then FEATURE=$(basename \"$FILE\" .md); printf '{\"hookSpecificOutput\":{\"hookEventName\":\"PostToolUse\",\"additionalContext\":\"🔔 [PostToolUse] docs/features/%s.md 수정 감지 — 즉시 실행하세요:\\n1) /sync-schema --auto %s\\n2) /sync-api --auto %s\\n3) /sync-e2e --auto %s\\n4) /sync-impl --auto %s\"}}' \"$FEATURE\" \"$FEATURE\" \"$FEATURE\" \"$FEATURE\" \"$FEATURE\"; fi",
             "timeout": 30,
-            "statusMessage": "doc/*.md 변경 감지 중..."
+            "statusMessage": "docs/features/*.md 변경 감지 중..."
           }
         ]
       },
